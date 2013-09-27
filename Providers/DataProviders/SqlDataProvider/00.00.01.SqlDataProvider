@@ -1,0 +1,19 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+UPDATE {databaseOwner}[{objectQualifier}Assemblies]
+SET [PackageID] = (SELECT [PackageID] FROM {databaseOwner}[{objectQualifier}Packages] WHERE [Name] = 'DotNetNuke.HostSettings')
+WHERE [AssemblyName] = 'Newtonsoft.Json.dll'
+AND [PackageID] IS NULL
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

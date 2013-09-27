@@ -1,0 +1,97 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="DNNReferralModule" type="Module" version="00.00.01">
+      <friendlyName>DNNReferralModule</friendlyName>
+      <description>This is a module for the DNN Platform that works with the DNN Store to enable users to refer customers to the DNN Store.</description>
+      <iconFile>Images/icon_extensions.gif</iconFile>
+      <owner>
+        <name>Nathan Rover</name>
+        <organization>DNN Corp.</organization>
+        <url>http://store.dnnsoftware.com</url>
+        <email>store@dnnsoftware.com</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">05.01.00</dependency>
+      </dependencies>
+      
+      <components>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\DNNReferralModule</basePath>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>00.00.01.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+            <script type="UnInstall">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+          </scripts>
+        </component>
+
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DNNReferralModule</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DNNReferralModule</moduleName>
+            <foldername>DNNReferralModule</foldername>
+            <businessControllerClass>DotNetNuke.Modules.DNNReferralModule.Components.FeatureController</businessControllerClass>
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DNNReferralModule</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DNNReferralModule/View.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/DNNReferralModule/Settings.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>DNNReferralModule Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>DNNReferralModule.dll</name>
+              <path>bin</path>
+            </assembly>
+              <assembly>
+                  <name>Newtonsoft.Json.dll</name>
+                  <path>bin</path>
+              </assembly>
+          </assemblies>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
