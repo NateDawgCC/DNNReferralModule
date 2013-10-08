@@ -60,42 +60,31 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                 int.TryParse(sNumberOfResults, out numberOfResults);
 
-                switch (mode)
+                var sEnableCache = GetSettingOrDefault("EnableCache");
+                bool enableCache;
+
+                bool.TryParse(sEnableCache, out enableCache);
+
+                var sCacheDuration = GetSettingOrDefault("CacheDuration");
+                int cacheDuration;
+
+                int.TryParse(sCacheDuration, out cacheDuration);
+
+                if (cacheDuration < 0)
                 {
-                    case "TopModules":
-                        RenderOutput(ServiceController.GetTopModules(numberOfResults, sortOrder));
-                        break;
-                    case "TopSkins":
-                        RenderOutput(ServiceController.GetTopSkins(numberOfResults, sortOrder));
-                        break;
-                    case "MyProducts":
-                        var sVendorId = Settings.Contains("VendorId") ? Settings["VendorId"].ToString() : "";
-                        int vendorId;
-
-                        int.TryParse(sVendorId, out vendorId);
-
-                        RenderOutput(ServiceController.GetVendorsProducts(vendorId, numberOfResults, sortOrder));
-                        break;
-                    case "SearchResults":
-                        var searchParameter = Settings.Contains("SearchParameter") ? Settings["SearchParameter"].ToString() : string.Empty;
-                        var results = new List<PackageInfo>();
-
-                        if (!String.IsNullOrEmpty(searchParameter))
-                        {
-                            if (!String.IsNullOrEmpty(Request.QueryString[searchParameter]))
-                            {
-                                var searchText = Request.QueryString[searchParameter];
-                                results = ServiceController.GetProductsBySearch(searchText, numberOfResults, sortOrder);
-                            }
-                        }
-
-                        RenderOutput(results);
-
-                        break;
-                    default:
-                        litOutput.Text = Localization.GetString("pleaseConfig", LocalResourceFile);
-                        break;
+                    cacheDuration = 0;
                 }
+
+                var serviceController = new ServiceController
+                    {
+                        Referer = Request.Url.ToString(),
+                        EnableCache = enableCache,
+                        CacheDuration = cacheDuration
+                    };
+
+                var results = GetResults(mode, serviceController, numberOfResults, sortOrder);
+
+                RenderOutput(results);
 
                 var referralCode = Settings.Contains("ReferralCode") ? Settings["ReferralCode"].ToString() : string.Empty;
             
@@ -109,6 +98,74 @@ namespace DotNetNuke.Modules.DNNReferralModule
             {
                 Exceptions.ProcessModuleLoadException(this, ex);
             }
+        }
+
+        private List<PackageInfo> GetResults(string mode, ServiceController serviceController, int numberOfResults, string sortOrder)
+        {
+            var results = new List<PackageInfo>();
+
+            switch (mode)
+            {
+                case "TopModules":
+                    results = serviceController.GetTopModules(numberOfResults, sortOrder);
+                    break;
+                case "TopSkins":
+                    results = serviceController.GetTopSkins(numberOfResults, sortOrder);
+                    break;
+                case "MyProducts":
+                    var sVendorId = Settings.Contains("VendorId") ? Settings["VendorId"].ToString() : "";
+                    int vendorId;
+
+                    int.TryParse(sVendorId, out vendorId);
+
+                    results = serviceController.GetVendorsProducts(vendorId, numberOfResults, sortOrder);
+                    break;
+                case "DynamicSearchResults":
+                    var searchParameter = Settings.Contains("SearchParameter")
+                                              ? Settings["SearchParameter"].ToString()
+                                              : string.Empty;
+
+                    if (!String.IsNullOrEmpty(searchParameter))
+                    {
+                        if (!String.IsNullOrEmpty(Request.QueryString[searchParameter]))
+                        {
+                            var searchText = Request.QueryString[searchParameter];
+                            results = serviceController.GetProductsBySearch(searchText, numberOfResults, sortOrder);
+                        }
+                    }
+
+                    if (results.Count <= 0)
+                    {
+                        var sEnableFallBackMode = GetSettingOrDefault("EnableFallBackMode");
+                        bool enableFallBackMode;
+
+                        bool.TryParse(sEnableFallBackMode, out enableFallBackMode);
+                        if (enableFallBackMode)
+                        {
+                            var fallBackMode = GetSettingOrDefault("FallBackMode");
+                            var fallBackSortOrder = GetSettingOrDefault("FallBackSortOrder");
+
+                            results = GetResults(fallBackMode, serviceController, numberOfResults, fallBackSortOrder);
+                        }
+                    }
+
+                    break;
+                case "StaticSearchResults":
+                    var staticSearchText = Settings.Contains("StaticSearch")
+                                               ? Settings["StaticSearch"].ToString()
+                                               : string.Empty;
+
+                    if (!String.IsNullOrEmpty(staticSearchText))
+                    {
+                        results = serviceController.GetProductsBySearch(staticSearchText, numberOfResults, sortOrder);
+                    }
+
+                    break;
+                default:
+                    litOutput.Text = Localization.GetString("pleaseConfig", LocalResourceFile);
+                    break;
+            }
+            return results;
         }
 
         void RenderOutput(ICollection<PackageInfo> items)

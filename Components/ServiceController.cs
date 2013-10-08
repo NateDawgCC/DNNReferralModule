@@ -20,13 +20,36 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using DotNetNuke.Common.Utilities;
 using Newtonsoft.Json.Linq;
 
 namespace DotNetNuke.Modules.DNNReferralModule.Components
 {
     public class ServiceController
     {
-        public static List<PackageInfo> GetTopModules(int numberOfResults, string orderBy)
+        public string Referer { get; set; }
+        public bool EnableCache { get; set; }
+        public int CacheDuration { get; set; }
+        
+        private object GetTopModulesCallback(CacheItemArgs cacheItemArgs)
+        {
+            var numberOfResults = (int)cacheItemArgs.ParamList[0];
+            var orderBy = (string)cacheItemArgs.ParamList[1];
+
+            return GetTopModulesResults(numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetTopModules(int numberOfResults, string orderBy)
+        {
+            if (EnableCache)
+            {
+                return CBO.GetCachedObject<List<PackageInfo>>(new CacheItemArgs("DNNReferralModule_GetTopModules_results_" + numberOfResults + "_orderBy_" + orderBy, CacheDuration, DataCache.ModuleControlsCachePriority, numberOfResults, orderBy), GetTopModulesCallback);
+            }
+
+            return GetTopModulesResults(numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetTopModulesResults(int numberOfResults, string orderBy)
         {
             var results = new List<PackageInfo>();
 
@@ -34,6 +57,7 @@ namespace DotNetNuke.Modules.DNNReferralModule.Components
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://store.dnnsoftware.com/DesktopModules/WebServices/API/APIService/GetTopModules?numberOfResults=" + numberOfResults + "&orderBy=" + orderBy);
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Referer = Referer;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -56,7 +80,25 @@ namespace DotNetNuke.Modules.DNNReferralModule.Components
             return results;
         }
 
-        public static List<PackageInfo> GetTopSkins(int numberOfResults, string orderBy)
+        private object GetTopSkinsCallback(CacheItemArgs cacheItemArgs)
+        {
+            var numberOfResults = (int)cacheItemArgs.ParamList[0];
+            var orderBy = (string)cacheItemArgs.ParamList[1];
+
+            return GetTopSkinsResults(numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetTopSkins(int numberOfResults, string orderBy)
+        {
+            if (EnableCache)
+            {
+                return CBO.GetCachedObject<List<PackageInfo>>(new CacheItemArgs("DNNReferralModule_GetTopSkins_results_" + numberOfResults + "_orderBy_" + orderBy, CacheDuration, DataCache.ModuleControlsCachePriority, numberOfResults, orderBy), GetTopSkinsCallback);
+            }
+
+            return GetTopSkinsResults(numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetTopSkinsResults(int numberOfResults, string orderBy)
         {
             var results = new List<PackageInfo>();
 
@@ -64,6 +106,7 @@ namespace DotNetNuke.Modules.DNNReferralModule.Components
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://store.dnnsoftware.com/DesktopModules/WebServices/API/APIService/GetTopSkins?numberOfResults=" + numberOfResults + "&orderBy=" + orderBy);
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Referer = Referer;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -86,16 +129,40 @@ namespace DotNetNuke.Modules.DNNReferralModule.Components
             return results;
         }
 
-        public static List<PackageInfo> GetVendorsProducts(int vendorId, int numberOfResults, string orderBy)
+        private object GetVendorsProductsCallback(CacheItemArgs cacheItemArgs)
+        {
+            var vendorId = (int)cacheItemArgs.ParamList[0];
+            var numberOfResults = (int)cacheItemArgs.ParamList[1];
+            var orderBy = (string)cacheItemArgs.ParamList[2];
+
+            return GetVendorsProductsResults(vendorId, numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetVendorsProducts(int vendorId, int numberOfResults, string orderBy)
+        {
+            if (EnableCache)
+            {
+                return CBO.GetCachedObject<List<PackageInfo>>(new CacheItemArgs("DNNReferralModule_GetVendorsProducts_vendorId_" + vendorId + "_results_" + numberOfResults + "_orderBy_" + orderBy, CacheDuration, DataCache.ModuleControlsCachePriority, vendorId, numberOfResults, orderBy), GetVendorsProductsCallback);
+            }
+
+            return GetVendorsProductsResults(vendorId, numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetVendorsProductsResults(int vendorId, int numberOfResults, string orderBy)
         {
             var results = new List<PackageInfo>();
 
             try
             {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://store.dnnsoftware.com/DesktopModules/WebServices/API/APIService/GetVendorsActiveProducts?vendorId=" + vendorId + "&numberOfResults=" + numberOfResults + "&orderBy=" + orderBy);
+                var httpWebRequest =
+                    (HttpWebRequest)
+                    WebRequest.Create(
+                        "http://store.dnnsoftware.com/DesktopModules/WebServices/API/APIService/GetVendorsActiveProducts?vendorId=" +
+                        vendorId + "&numberOfResults=" + numberOfResults + "&orderBy=" + orderBy);
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Referer = Referer;
 
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var responseText = streamReader.ReadToEnd();
@@ -116,7 +183,26 @@ namespace DotNetNuke.Modules.DNNReferralModule.Components
             return results;
         }
 
-        public static List<PackageInfo> GetProductsBySearch(string searchText, int numberOfResults, string orderBy)
+        private object GetProductsBySearchCallback(CacheItemArgs cacheItemArgs)
+        {
+            var searchText = (string)cacheItemArgs.ParamList[0];
+            var numberOfResults = (int)cacheItemArgs.ParamList[1];
+            var orderBy = (string)cacheItemArgs.ParamList[2];
+
+            return GetProductsBySearchResults(searchText, numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetProductsBySearch(string searchText, int numberOfResults, string orderBy)
+        {
+            if (EnableCache)
+            {
+                return CBO.GetCachedObject<List<PackageInfo>>(new CacheItemArgs("DNNReferralModule_GetVendorsProducts_searchText_" + searchText + "_results_" + numberOfResults + "_orderBy_" + orderBy, CacheDuration, DataCache.ModuleControlsCachePriority, searchText, numberOfResults, orderBy), GetProductsBySearchCallback);
+            }
+
+            return GetProductsBySearchResults(searchText, numberOfResults, orderBy);
+        }
+
+        public List<PackageInfo> GetProductsBySearchResults(string searchText, int numberOfResults, string orderBy)
         {
             var results = new List<PackageInfo>();
 
@@ -124,36 +210,7 @@ namespace DotNetNuke.Modules.DNNReferralModule.Components
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://store.dnnsoftware.com/DesktopModules/WebServices/API/APIService/GetProductsBySearch?searchText=" + searchText + "&numberOfResults=" + numberOfResults + "&orderBy=" + orderBy);
                 httpWebRequest.Method = "GET";
-
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var responseText = streamReader.ReadToEnd();
-                    var jObject = JObject.Parse(responseText);
-                    var packages = jObject["Packages"].ToArray();
-
-                    foreach (var package in packages)
-                    {
-                        var packageObj = new PackageInfo(package);
-                        results.Add(packageObj);
-                    }
-                }
-            }
-            catch
-            {
-            }
-
-            return results;
-        }
-
-        public static List<PackageInfo> Test()
-        {
-            var results = new List<PackageInfo>();
-
-            try
-            {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://store.dnnsoftware.com/DesktopModules/WebServices/API/APIService/GetVendorsActiveProducts?vendorId=680&numberOfResults=10&orderBy=none");
-                httpWebRequest.Method = "GET";
+                httpWebRequest.Referer = Referer;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))

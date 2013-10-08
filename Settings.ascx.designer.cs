@@ -49,6 +49,114 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlMode;
         
         /// <summary>
+        /// trSearchParameter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trSearchParameter;
+        
+        /// <summary>
+        /// lblSearchParameter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearchParameter;
+        
+        /// <summary>
+        /// txtSearchParameter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchParameter;
+        
+        /// <summary>
+        /// trEnableFallBackMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trEnableFallBackMode;
+        
+        /// <summary>
+        /// lblEnableFallBackMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblEnableFallBackMode;
+        
+        /// <summary>
+        /// chkEnableFallBackMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkEnableFallBackMode;
+        
+        /// <summary>
+        /// trSearchFallBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trSearchFallBack;
+        
+        /// <summary>
+        /// lblFallBackMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblFallBackMode;
+        
+        /// <summary>
+        /// ddlFallBackMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFallBackMode;
+        
+        /// <summary>
+        /// trFallBackSortOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trFallBackSortOrder;
+        
+        /// <summary>
+        /// lblFallBackSortOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblFallBackSortOrder;
+        
+        /// <summary>
+        /// ddlFallBackSortOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFallBackSortOrder;
+        
+        /// <summary>
         /// trVendorId control.
         /// </summary>
         /// <remarks>
@@ -76,40 +184,40 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.TextBox txtVendorId;
         
         /// <summary>
-        /// Comparevalidator1 control.
+        /// cvVendorId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator Comparevalidator1;
+        protected global::System.Web.UI.WebControls.CompareValidator cvVendorId;
         
         /// <summary>
-        /// trSearchParameter control.
+        /// trStaticSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trSearchParameter;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trStaticSearch;
         
         /// <summary>
-        /// lblSearchParameter control.
+        /// lblStaticSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearchParameter;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblStaticSearch;
         
         /// <summary>
-        /// txtSearchParameter control.
+        /// txtStaticSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchParameter;
+        protected global::System.Web.UI.WebControls.TextBox txtStaticSearch;
         
         /// <summary>
         /// lblSortOrder control.
@@ -148,6 +256,105 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.TextBox txtNumberOfResults;
         
         /// <summary>
+        /// cvNumberOfResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvNumberOfResults;
+        
+        /// <summary>
+        /// rfvNumberOfResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumberOfResults;
+        
+        /// <summary>
+        /// lblEnableCache control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblEnableCache;
+        
+        /// <summary>
+        /// chkEnableCache control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkEnableCache;
+        
+        /// <summary>
+        /// trCacheDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trCacheDuration;
+        
+        /// <summary>
+        /// lblCacheDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblCacheDuration;
+        
+        /// <summary>
+        /// txtCacheDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCacheDuration;
+        
+        /// <summary>
+        /// cvCacheDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvCacheDuration;
+        
+        /// <summary>
+        /// trClearCache control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trClearCache;
+        
+        /// <summary>
+        /// lblClearCache control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblClearCache;
+        
+        /// <summary>
+        /// btnClearCache control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClearCache;
+        
+        /// <summary>
         /// lblPrimaryTemplate control.
         /// </summary>
         /// <remarks>
@@ -164,6 +371,15 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPrimaryTemplate;
+        
+        /// <summary>
+        /// rfvPrimaryTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrimaryTemplate;
         
         /// <summary>
         /// lblRowTemplate control.
@@ -184,6 +400,15 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.TextBox txtRowTemplate;
         
         /// <summary>
+        /// rfvRowTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRowTemplate;
+        
+        /// <summary>
         /// lblItemTemplate control.
         /// </summary>
         /// <remarks>
@@ -202,6 +427,15 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.TextBox txtItemTemplate;
         
         /// <summary>
+        /// rfvItemTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvItemTemplate;
+        
+        /// <summary>
         /// lblNoResultsTemplate control.
         /// </summary>
         /// <remarks>
@@ -218,5 +452,14 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNoResultsTemplate;
+        
+        /// <summary>
+        /// rfvNoResultsTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNoResultsTemplate;
     }
 }

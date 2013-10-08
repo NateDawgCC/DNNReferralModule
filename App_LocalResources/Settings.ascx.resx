@@ -223,7 +223,7 @@
   <data name="liSalesUnitsDesc.Text" xml:space="preserve">
     <value>Total Units Sold Descending</value>
   </data>
-  <data name="liSearchResults.Text" xml:space="preserve">
+  <data name="liDynamicSearchResults.Text" xml:space="preserve">
     <value>Dynamic Search Results</value>
   </data>
   <data name="liTopModules.Text" xml:space="preserve">
@@ -252,5 +252,65 @@
   </data>
   <data name="SortOrder.Text" xml:space="preserve">
     <value>RecentSalesRevenueDesc</value>
+  </data>
+  <data name="btnClearCache.Text" xml:space="preserve">
+    <value>Clear Cache</value>
+  </data>
+  <data name="CacheDuration.Text" xml:space="preserve">
+    <value>3600</value>
+  </data>
+  <data name="EnableCache.Text" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="lblCacheDuration.Help" xml:space="preserve">
+    <value>Enter (in seconds) the amount of time you would like to cache the product data for.</value>
+  </data>
+  <data name="lblCacheDuration.Text" xml:space="preserve">
+    <value>Cache Duration</value>
+  </data>
+  <data name="lblClearCache.Help" xml:space="preserve">
+    <value>Click the button to the right to clear and data that might be cached by this module.</value>
+  </data>
+  <data name="lblClearCache.Text" xml:space="preserve">
+    <value>Clear Cache</value>
+  </data>
+  <data name="lblEnableCache.Help" xml:space="preserve">
+    <value>Check this box to enable caching of the product data.</value>
+  </data>
+  <data name="lblEnableCache.Text" xml:space="preserve">
+    <value>Enable Cache</value>
+  </data>
+  <data name="NotAValidNumber.ErrorMessage" xml:space="preserve">
+    <value>Not a valid whole number</value>
+  </data>
+  <data name="Required.ErrorMessage" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="lblStaticSearch.Help" xml:space="preserve">
+    <value>Enter the search text you would like this module to display the results for</value>
+  </data>
+  <data name="lblStaticSearch.Text" xml:space="preserve">
+    <value>Static Search Text</value>
+  </data>
+  <data name="liStaticSearchResults.Text" xml:space="preserve">
+    <value>Static Search Results</value>
+  </data>
+  <data name="lblEnableFallBackMode.Help" xml:space="preserve">
+    <value>Check this box to configure the fall back mode to be used in the event that the search returns no results.</value>
+  </data>
+  <data name="lblEnableFallBackMode.Text" xml:space="preserve">
+    <value>Enable Fall Back Mode</value>
+  </data>
+  <data name="lblFallBackMode.Help" xml:space="preserve">
+    <value>Select the rendor mode from the drop down list. This is how you can specify what type of product list you would like this module to pull from the store.</value>
+  </data>
+  <data name="lblFallBackMode.Text" xml:space="preserve">
+    <value>Select Fall Back Mode</value>
+  </data>
+  <data name="lblFallBackSortOrder.Help" xml:space="preserve">
+    <value>Select how you would like the the fall back results to be sorted</value>
+  </data>
+  <data name="lblFallBackSortOrder.Text" xml:space="preserve">
+    <value>Select Fall Back Sort Order</value>
   </data>
 </root>

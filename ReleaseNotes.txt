@@ -8,17 +8,43 @@
 <div class="License">
 	<h3>About the DNNReferralModule</h3>
 	<p class="Owner">
-		<b>Version 1.0.0</b><br /><br />
+		<b>Version 0.0.1</b><br /><br />
 	</p>
-	<p>This is the initial release of this module.</p>
+	<p>Alpha release of this module.</p>
+	<br/>
+	<p class="Owner">
+		<b>Version 0.1.0</b><br /><br />
+	</p>
+	<p>Beta release of this module.</p>
 	
-	<div style="display:none;">
+	<div>
+		<h4>Enhancements</h4>
+		<ul>
+			<li>Added Caching</li>
+		</ul>
+	</div>
+	<div>
 		<h4>Bug Fixes</h4>
 		<ul>
-				<li>List</li>
-				<li>of</li>
-				<li>bug</li>
-				<li>fixes</li>
+			<li>Fixed Referrer value passed during web service call</li>
+		</ul>
+	</div>
+	<br/>
+	<p class="Owner">
+		<b>Version 1.0.0</b><br /><br />
+	</p>
+	<p>Initial full release of this module.</p>
+	
+	<div>
+		<h4>Enhancements</h4>
+		<ul>
+			<li>Added support for static search results</li>
+		</ul>
+	</div>
+	<div>
+		<h4>Bug Fixes</h4>
+		<ul>
+			<li>none</li>
 		</ul>
 	</div>
 </div>

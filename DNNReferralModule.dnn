@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNNReferralModule" type="Module" version="00.00.01">
+    <package name="DNNReferralModule" type="Module" version="01.00.00">
       <friendlyName>DNNReferralModule</friendlyName>
       <description>This is a module for the DNN Platform that works with the DNN Store to enable users to refer customers to the DNN Store.</description>
       <iconFile>Images/icon_extensions.gif</iconFile>
@@ -23,13 +23,13 @@
             <basePath>DesktopModules\DNNReferralModule</basePath>
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>00.00.01.SqlDataProvider</name>
-              <version>00.00.01</version>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
             </script>
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>Uninstall.SqlDataProvider</name>
-              <version>00.00.01</version>
+              <version>01.00.00</version>
             </script>
           </scripts>
         </component>
