@@ -18,18 +18,6 @@
     </file>
     <file>
       <path />
-      <name>Edit.ascx</name>
-    </file>
-    <file>
-      <path />
-      <name>Edit.ascx.cs</name>
-    </file>
-    <file>
-      <path />
-      <name>Edit.ascx.designer.cs</name>
-    </file>
-    <file>
-      <path />
       <name>License.txt</name>
     </file>
     <file>
@@ -70,10 +58,6 @@
     </file>
     <file>
       <path>App_LocalResources/</path>
-      <name>Edit.ascx.resx</name>
-    </file>
-    <file>
-      <path>App_LocalResources/</path>
       <name>Settings.ascx.resx</name>
     </file>
     <file>
@@ -91,6 +75,22 @@
     <file>
       <path>Components/</path>
       <name>FeatureController.cs</name>
+    </file>
+    <file>
+      <path>Components/</path>
+      <name>PackageInfo.cs</name>
+    </file>
+    <file>
+      <path>Components/</path>
+      <name>ReviewInfo.cs</name>
+    </file>
+    <file>
+      <path>Components/</path>
+      <name>ServiceController.cs</name>
+    </file>
+    <file>
+      <path>Components/</path>
+      <name>SupplierInfo.cs</name>
     </file>
     <file>
       <path>Data/</path>
@@ -135,6 +135,70 @@
     <file>
       <path>packages/MSBuildTasks.1.4.0.61/tools/</path>
       <name>MSBuild.psm1</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/</path>
+      <name>Newtonsoft.Json.5.0.6.nupkg</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/</path>
+      <name>Newtonsoft.Json.5.0.6.nuspec</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net20/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net20/</path>
+      <name>Newtonsoft.Json.xml</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net35/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net35/</path>
+      <name>Newtonsoft.Json.xml</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net40/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net40/</path>
+      <name>Newtonsoft.Json.xml</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net45/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/net45/</path>
+      <name>Newtonsoft.Json.xml</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/netcore45/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/netcore45/</path>
+      <name>Newtonsoft.Json.xml</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/portable-net40+sl4+wp7+win8/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/portable-net40+sl4+wp7+win8/</path>
+      <name>Newtonsoft.Json.xml</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/portable-net45+wp80+win8/</path>
+      <name>Newtonsoft.Json.dll</name>
+    </file>
+    <file>
+      <path>packages/Newtonsoft.Json.5.0.6/lib/portable-net45+wp80+win8/</path>
+      <name>Newtonsoft.Json.xml</name>
     </file>
     <file>
       <path>Properties/</path>

@@ -17,8 +17,11 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Globalization;
+using System.Web.UI.WebControls;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Modules.DNNReferralModule.Components;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 
@@ -62,8 +65,23 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                     ddlMode.SelectedValue = Settings.Contains("Mode") ? Settings["Mode"].ToString() : Localization.GetString("Mode", LocalResourceFile, true);
 
+                    ddlVendor.Items.Add(new ListItem(Localization.GetString("SelectOne", LocalResourceFile, true), "-1"));
+
+                    var serviceController = new ServiceController();
+                    var suppliers = serviceController.GetSupplierList();
+
+                    foreach (var supplierInfo in suppliers)
+                    {
+                        ddlVendor.Items.Add(new ListItem(supplierInfo.SupplierName, supplierInfo.SupplierUserId));
+                    }
+
                     if (Settings.Contains("VendorId"))
-                        txtVendorId.Text = Settings["VendorId"].ToString();
+                    {
+                        if (ddlVendor.Items.FindByValue(Settings["VendorId"].ToString()) != null)
+                        {
+                            ddlVendor.SelectedValue = Settings["VendorId"].ToString();
+                        }
+                    }
 
                     if (Settings.Contains("SearchParameter"))
                         txtSearchParameter.Text = Settings["SearchParameter"].ToString();
@@ -95,7 +113,9 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                     txtRowTemplate.Text = Settings.Contains("RowTemplate") ? Settings["RowTemplate"].ToString() : Localization.GetString("RowTemplate", LocalResourceFile, true);
 
-                    txtItemTemplate.Text = Settings.Contains("ItemTemplate") ? Settings["ItemTemplate"].ToString() : Localization.GetString("ItemTemplate", LocalResourceFile, true);
+                    txtPackageTemplate.Text = Settings.Contains("PackageTemplate") ? Settings["PackageTemplate"].ToString() : Localization.GetString("PackageTemplate", LocalResourceFile, true);
+
+                    txtReviewTemplate.Text = Settings.Contains("ReviewTemplate") ? Settings["ReviewTemplate"].ToString() : Localization.GetString("ReviewTemplate", LocalResourceFile, true);
 
                     txtNoResultsTemplate.Text = Settings.Contains("NoResultsTemplate") ? Settings["NoResultsTemplate"].ToString() : Localization.GetString("NoResultsTemplate", LocalResourceFile, true);
 
@@ -121,7 +141,8 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                 modules.UpdateTabModuleSetting(TabModuleId, "ReferralCode", txtReferralCode.Text);
                 modules.UpdateTabModuleSetting(TabModuleId, "Mode", ddlMode.SelectedValue);
-                modules.UpdateTabModuleSetting(TabModuleId, "VendorId", txtVendorId.Text);
+                modules.UpdateTabModuleSetting(TabModuleId, "VendorId", ddlVendor.SelectedValue);
+                modules.UpdateTabModuleSetting(TabModuleId, "PackageId", ddlProduct.SelectedValue);
                 modules.UpdateTabModuleSetting(TabModuleId, "SearchParameter", txtSearchParameter.Text);
                 modules.UpdateTabModuleSetting(TabModuleId, "EnableFallBackMode", chkEnableFallBackMode.Checked.ToString());
                 modules.UpdateTabModuleSetting(TabModuleId, "FallBackMode", ddlFallBackMode.SelectedValue);
@@ -133,7 +154,8 @@ namespace DotNetNuke.Modules.DNNReferralModule
                 modules.UpdateTabModuleSetting(TabModuleId, "CacheDuration", txtCacheDuration.Text);
                 modules.UpdateTabModuleSetting(TabModuleId, "PrimaryTemplate", txtPrimaryTemplate.Text);
                 modules.UpdateTabModuleSetting(TabModuleId, "RowTemplate", txtRowTemplate.Text);
-                modules.UpdateTabModuleSetting(TabModuleId, "ItemTemplate", txtItemTemplate.Text);
+                modules.UpdateTabModuleSetting(TabModuleId, "PackageTemplate", txtPackageTemplate.Text);
+                modules.UpdateTabModuleSetting(TabModuleId, "ReviewTemplate", txtReviewTemplate.Text);
                 modules.UpdateTabModuleSetting(TabModuleId, "NoResultsTemplate", txtNoResultsTemplate.Text);
             }
             catch (Exception ex) //Module failed to load
@@ -143,6 +165,18 @@ namespace DotNetNuke.Modules.DNNReferralModule
         }
 
         protected void ddlMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                SetVisibility();
+            }
+            catch (Exception ex)
+            {
+                Exceptions.ProcessModuleLoadException(this, ex);
+            }
+        }
+
+        protected void ddlVendor_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -205,26 +239,37 @@ namespace DotNetNuke.Modules.DNNReferralModule
         private void SetVisibility()
         {
             var mode = ddlMode.SelectedValue;
-
-            trVendorId.Visible = false;
+            trSortOrder.Visible = false;
+            trVendor.Visible = false;
+            trProduct.Visible = false;
             trSearchParameter.Visible = false;
             trStaticSearch.Visible = false;
             trEnableFallBackMode.Visible = false;
             trSearchFallBack.Visible = false;
             trFallBackSortOrder.Visible = false;
+            trPackageTemplate.Visible = false;
+            trReviewTemplate.Visible = false;
 
             switch (mode)
             {
                 case "TopModules":
+                    trSortOrder.Visible = true;
+                    trPackageTemplate.Visible = true;
                     ddlSortOrder.SelectedValue = "RecentSalesRevenueDesc";
                     break;
                 case "TopSkins":
+                    trSortOrder.Visible = true;
+                    trPackageTemplate.Visible = true;
                     ddlSortOrder.SelectedValue = "RecentSalesRevenueDesc";
                     break;
                 case "MyProducts":
-                    trVendorId.Visible = true;
+                    trSortOrder.Visible = true;
+                    trPackageTemplate.Visible = true;
+                    trVendor.Visible = true;
                     break;
                 case "DynamicSearchResults":
+                    trSortOrder.Visible = true;
+                    trPackageTemplate.Visible = true;
                     ddlSortOrder.SelectedValue = "Relevance";
                     trSearchParameter.Visible = true;
                     trEnableFallBackMode.Visible = true;
@@ -244,7 +289,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
                                 ddlFallBackSortOrder.SelectedValue = "RecentSalesRevenueDesc";
                                 break;
                             case "MyProducts":
-                                trVendorId.Visible = true;
+                                trVendor.Visible = true;
                                 break;
                             case "StaticSearchResults":
                                 ddlFallBackSortOrder.SelectedValue = "Relevance";
@@ -255,8 +300,49 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                     break;
                 case "StaticSearchResults":
+                    trSortOrder.Visible = true;
+                    trPackageTemplate.Visible = true;
                     ddlSortOrder.SelectedValue = "Relevance";
                     trStaticSearch.Visible = true;
+                    break;
+                case "FeaturedReviews":
+                    trReviewTemplate.Visible = true;
+                    break;
+                case "SupplierReviews":
+                    trReviewTemplate.Visible = true;
+                    trVendor.Visible = true;
+                    break;
+                case "PackageReviews":
+                    trReviewTemplate.Visible = true;
+                    trVendor.Visible = true;
+                    trProduct.Visible = true;
+
+                    if (ddlVendor.SelectedValue != "-1")
+                    {
+                        ddlProduct.Items.Add(new ListItem(Localization.GetString("SelectOne", LocalResourceFile, true), "-1"));
+                        
+                        int vendorId;
+                        int.TryParse(ddlVendor.SelectedValue, out vendorId);
+
+                        if (vendorId > 0)
+                        {
+                            var serviceController = new ServiceController();
+                            var products = serviceController.GetVendorsProducts(vendorId, 1000, "nameasc");
+
+                            foreach (var productInfo in products)
+                            {
+                                ddlProduct.Items.Add(new ListItem(productInfo.PackageName, productInfo.PackageId.ToString(CultureInfo.InvariantCulture)));
+                            }
+
+                            if (Settings.Contains("PackageId"))
+                            {
+                                if (ddlProduct.Items.FindByValue(Settings["PackageId"].ToString()) != null)
+                                {
+                                    ddlProduct.SelectedValue = Settings["PackageId"].ToString();
+                                }
+                            }
+                        }
+                    }
                     break;
                 default:
                     break;

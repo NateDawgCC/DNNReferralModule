@@ -157,40 +157,58 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlFallBackSortOrder;
         
         /// <summary>
-        /// trVendorId control.
+        /// trVendor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trVendorId;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trVendor;
         
         /// <summary>
-        /// lblVendorId control.
+        /// lblVendor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblVendorId;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblVendor;
         
         /// <summary>
-        /// txtVendorId control.
+        /// ddlVendor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVendorId;
+        protected global::System.Web.UI.WebControls.DropDownList ddlVendor;
         
         /// <summary>
-        /// cvVendorId control.
+        /// trProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cvVendorId;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trProduct;
+        
+        /// <summary>
+        /// lblProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblProduct;
+        
+        /// <summary>
+        /// ddlProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProduct;
         
         /// <summary>
         /// trStaticSearch control.
@@ -218,6 +236,15 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStaticSearch;
+        
+        /// <summary>
+        /// trSortOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trSortOrder;
         
         /// <summary>
         /// lblSortOrder control.
@@ -409,31 +436,76 @@ namespace DotNetNuke.Modules.DNNReferralModule {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRowTemplate;
         
         /// <summary>
-        /// lblItemTemplate control.
+        /// trPackageTemplate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblItemTemplate;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trPackageTemplate;
         
         /// <summary>
-        /// txtItemTemplate control.
+        /// lblPackageTemplate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtItemTemplate;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblPackageTemplate;
         
         /// <summary>
-        /// rfvItemTemplate control.
+        /// txtPackageTemplate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvItemTemplate;
+        protected global::System.Web.UI.WebControls.TextBox txtPackageTemplate;
+        
+        /// <summary>
+        /// rfvPackageTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPackageTemplate;
+        
+        /// <summary>
+        /// trReviewTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trReviewTemplate;
+        
+        /// <summary>
+        /// lblReviewTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblReviewTemplate;
+        
+        /// <summary>
+        /// txtReviewTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReviewTemplate;
+        
+        /// <summary>
+        /// rfvReviewTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReviewTemplate;
         
         /// <summary>
         /// lblNoResultsTemplate control.

@@ -8,9 +8,44 @@
 <div class="License">
 	<h3>About the DNNReferralModule</h3>
 	<p class="Owner">
-		<b>Version 0.0.1</b><br /><br />
+		<b>Version 1.1.0</b><br /><br />
 	</p>
-	<p>Alpha release of this module.</p>
+	<p>New release with additional enhancements.</p>
+	
+	<div>
+		<h4>Enhancements</h4>
+		<ul>
+			<li>Changed the way Vendor specific settings are performed. A drop down list of all active vendors is now provided rather than specifying a vendor user id. This data is pulled from the store and only active vendors with at least one active product are shown in the list.</li>
+			<li>When configuring the settings for a product specific render mode, two drop downs will be used first is the Vendor drop down specified above, second is a product drop down that will automatically pull a list of active products based on the selected vendor. This data is auto populated via the Store API.</li>
+			<li>A new render mode "Featured Reviews" was added. This mode will pull recent reviews from the store. Currently, these are 5 star reviews with a good length comment for active products.The goal of this system is to draw attention to quality products that are actively being used and reviewed.</li>
+			<li>Another new render mode "Vendor Reviews" was added. This mode will pull all recent reviews form all products by a specific vendor which can be configured in the settings.</li>
+			<li>Another new render mode "Package Reviews" was added. This mode will pull all recent reviews for a specific product which can be configured in the settings.</li>
+		</ul>
+	</div>
+	<div>
+		<h4>Bug Fixes</h4>
+		<ul>
+			<li>none</li>
+		</ul>
+	</div>
+	<br />
+	<p class="Owner">
+		<b>Version 1.0.0</b><br /><br />
+	</p>
+	<p>Initial full release of this module.</p>
+	
+	<div>
+		<h4>Enhancements</h4>
+		<ul>
+			<li>Added support for static search results</li>
+		</ul>
+	</div>
+	<div>
+		<h4>Bug Fixes</h4>
+		<ul>
+			<li>none</li>
+		</ul>
+	</div>
 	<br/>
 	<p class="Owner">
 		<b>Version 0.1.0</b><br /><br />
@@ -31,20 +66,7 @@
 	</div>
 	<br/>
 	<p class="Owner">
-		<b>Version 1.0.0</b><br /><br />
+		<b>Version 0.0.1</b><br /><br />
 	</p>
-	<p>Initial full release of this module.</p>
-	
-	<div>
-		<h4>Enhancements</h4>
-		<ul>
-			<li>Added support for static search results</li>
-		</ul>
-	</div>
-	<div>
-		<h4>Bug Fixes</h4>
-		<ul>
-			<li>none</li>
-		</ul>
-	</div>
+	<p>Alpha release of this module.</p>
 </div>

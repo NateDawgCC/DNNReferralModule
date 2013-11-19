@@ -82,9 +82,21 @@ namespace DotNetNuke.Modules.DNNReferralModule
                         CacheDuration = cacheDuration
                     };
 
-                var results = GetResults(mode, serviceController, numberOfResults, sortOrder);
+                switch (mode)
+                {
+                    case "FeaturedReviews":
+                    case "SupplierReviews":
+                    case "PackageReviews":
+                        var reviewResults = GetReviewResults(mode, serviceController, numberOfResults);
 
-                RenderOutput(results);
+                        RenderReviewOutput(reviewResults);
+                        break;
+                    default:
+                        var packageResults = GetPackageResults(mode, serviceController, numberOfResults, sortOrder);
+
+                        RenderPackageOutput(packageResults);
+                        break;
+                }
 
                 var referralCode = Settings.Contains("ReferralCode") ? Settings["ReferralCode"].ToString() : string.Empty;
             
@@ -100,7 +112,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
             }
         }
 
-        private List<PackageInfo> GetResults(string mode, ServiceController serviceController, int numberOfResults, string sortOrder)
+        private List<PackageInfo> GetPackageResults(string mode, ServiceController serviceController, int numberOfResults, string sortOrder)
         {
             var results = new List<PackageInfo>();
 
@@ -145,7 +157,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
                             var fallBackMode = GetSettingOrDefault("FallBackMode");
                             var fallBackSortOrder = GetSettingOrDefault("FallBackSortOrder");
 
-                            results = GetResults(fallBackMode, serviceController, numberOfResults, fallBackSortOrder);
+                            results = GetPackageResults(fallBackMode, serviceController, numberOfResults, fallBackSortOrder);
                         }
                     }
 
@@ -168,7 +180,35 @@ namespace DotNetNuke.Modules.DNNReferralModule
             return results;
         }
 
-        void RenderOutput(ICollection<PackageInfo> items)
+        private List<ReviewInfo> GetReviewResults(string mode, ServiceController serviceController, int numberOfResults)
+        {
+            var results = new List<ReviewInfo>();
+
+            switch (mode)
+            {
+                case "FeaturedReviews":
+                    results = serviceController.GetFeaturedReviews(numberOfResults, "submitdatedesc");
+                    break;
+                case "SupplierReviews":
+                    int supplierId;
+                    int.TryParse(GetSettingOrDefault("VendorId"), out supplierId);
+
+                    results = serviceController.GetSupplierReviews(supplierId, numberOfResults, "submitdatedesc");
+                    break;
+                case "PackageReviews":
+                    int packageId;
+                    int.TryParse(GetSettingOrDefault("PackageId"), out packageId);
+
+                    results = serviceController.GetPackageReviews(packageId, numberOfResults, "submitdatedesc");
+                    break;
+                default:
+                    litOutput.Text = Localization.GetString("pleaseConfig", LocalResourceFile);
+                    break;
+            }
+            return results;
+        }
+
+        void RenderPackageOutput(ICollection<PackageInfo> items)
         {
             if (items == null || items.Count <= 0)
             {
@@ -176,7 +216,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
             }
             else
             {
-                var itemTemplate = GetSettingOrDefault("ItemTemplate");
+                var packageTemplate = GetSettingOrDefault("PackageTemplate");
                 var rowTemplate = GetSettingOrDefault("RowTemplate");
                 var primaryTemplate = GetSettingOrDefault("PrimaryTemplate");
                 var referralCode = Settings.Contains("ReferralCode") ? Settings["ReferralCode"].ToString() : "";
@@ -185,7 +225,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                 foreach (var item in items)
                 {
-                    var itemOutput = itemTemplate;
+                    var itemOutput = packageTemplate;
                     itemOutput = itemOutput.Replace("[PackageId]", item.PackageId.ToString(CultureInfo.InvariantCulture));
                     itemOutput = itemOutput.Replace("[PackageName]", item.PackageName);
                     itemOutput = !string.IsNullOrEmpty(referralCode)
@@ -196,6 +236,58 @@ namespace DotNetNuke.Modules.DNNReferralModule
                     itemOutput = itemOutput.Replace("[PackageRatingNumber]",
                                                     item.PackageRatingNumber.ToString(CultureInfo.InvariantCulture));
                     itemOutput = itemOutput.Replace("[PackageRatingImage]", item.PackageRatingImage);
+                    itemOutput = itemOutput.Replace("[VendorName]", item.VendorName);
+                    itemOutput = !string.IsNullOrEmpty(referralCode)
+                                     ? itemOutput.Replace("[VendorLink]", item.VendorLink + "?r=" + referralCode)
+                                     : itemOutput.Replace("[VendorLink]", item.VendorLink);
+
+                    if (!rows.Contains("[ItemTemplate]"))
+                    {
+                        rows += rowTemplate;
+                    }
+
+                    rows = ReplaceFirst(rows, "[ItemTemplate]", itemOutput);
+                }
+
+                rows = rows.Replace("[ItemTemplate]", "&nbsp;");
+
+                litOutput.Text = primaryTemplate.Replace("[RowTemplate]", rows);
+            }
+        }
+
+        void RenderReviewOutput(ICollection<ReviewInfo> items)
+        {
+            if (items == null || items.Count <= 0)
+            {
+                litOutput.Text = GetSettingOrDefault("NoResultsTemplate");
+            }
+            else
+            {
+                var reviewTemplate = GetSettingOrDefault("ReviewTemplate");
+                var rowTemplate = GetSettingOrDefault("RowTemplate");
+                var primaryTemplate = GetSettingOrDefault("PrimaryTemplate");
+                var referralCode = Settings.Contains("ReferralCode") ? Settings["ReferralCode"].ToString() : "";
+
+                var rows = "";
+
+                foreach (var item in items)
+                {
+                    var itemOutput = reviewTemplate;
+                    itemOutput = itemOutput.Replace("[ReviewId]", item.ReviewId.ToString(CultureInfo.InvariantCulture));
+                    itemOutput = itemOutput.Replace("[PackageName]", item.PackageName);
+                    itemOutput = !string.IsNullOrEmpty(referralCode)
+                                     ? itemOutput.Replace("[PackageLink]", item.PackageLink + "?r=" + referralCode)
+                                     : itemOutput.Replace("[PackageLink]", item.PackageLink);
+                    itemOutput = itemOutput.Replace("[PackageIcon]", item.PackageIcon);
+                    itemOutput = itemOutput.Replace("[Rating]", item.Rating.ToString(CultureInfo.InvariantCulture));
+                    itemOutput = itemOutput.Replace("[Review]", item.Review);
+                    itemOutput = itemOutput.Replace("[ReviewerName]", item.ReviewerName);
+                    itemOutput = !string.IsNullOrEmpty(referralCode)
+                                     ? itemOutput.Replace("[ReviewerLink]", item.ReviewerLink + "?r=" + referralCode)
+                                     : itemOutput.Replace("[ReviewerLink]", item.ReviewerLink);
+                    itemOutput = itemOutput.Replace("[Reply]", item.Reply);
+                    itemOutput = itemOutput.Replace("[Date]", item.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture));
+                    itemOutput = itemOutput.Replace("[RatingImage]", item.RatingImage);
                     itemOutput = itemOutput.Replace("[VendorName]", item.VendorName);
                     itemOutput = !string.IsNullOrEmpty(referralCode)
                                      ? itemOutput.Replace("[VendorLink]", item.VendorLink + "?r=" + referralCode)

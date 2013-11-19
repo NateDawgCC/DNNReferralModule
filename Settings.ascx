@@ -30,6 +30,9 @@
                 <asp:ListItem resourcekey="liMyProducts" Value="MyProducts"></asp:ListItem>
                 <asp:ListItem resourcekey="liDynamicSearchResults" Value="DynamicSearchResults"></asp:ListItem>
                 <asp:ListItem resourcekey="liStaticSearchResults" Value="StaticSearchResults"></asp:ListItem>
+                <asp:ListItem resourceKey="liFeaturedReviews" Value="FeaturedReviews"></asp:ListItem>
+                <asp:ListItem resourceKey="liSupplierReviews" Value="SupplierReviews"></asp:ListItem>
+                <asp:ListItem resourceKey="liPackageReviews" Value="PackageReviews"></asp:ListItem>
             </asp:DropDownList>
         </td>
     </tr>
@@ -83,13 +86,20 @@
             </asp:DropDownList>
         </td>
     </tr>
-    <tr runat="server" id="trVendorId">
+    <tr runat="server" id="trVendor">
         <td class="SubHead">
-            <dnn:label id="lblVendorId" runat="server" controlname="txtVendorId" suffix=":" />
+            <dnn:label id="lblVendor" runat="server" controlname="ddlVendor" suffix=":" />
         </td>
         <td>
-            <asp:TextBox ID="txtVendorId" runat="server" Width="60" MaxLength="10" CssClass="NormalTextBox" />&nbsp;
-            <asp:CompareValidator ID="cvVendorId" runat="server" meta:resourcekey="NotAValidNumber" Operator="DataTypeCheck" Type="Integer" ControlToValidate="txtVendorId" Display="Dynamic" />
+            <asp:DropDownList ID="ddlVendor" runat="server" Width="400" CssClass="NormalTextBox" AutoPostBack="true" OnSelectedIndexChanged="ddlVendor_SelectedIndexChanged" />
+        </td>
+    </tr>
+    <tr runat="server" id="trProduct">
+        <td class="SubHead">
+            <dnn:label id="lblProduct" runat="server" controlname="ddlProduct" suffix=":" />
+        </td>
+        <td>
+            <asp:DropDownList ID="ddlProduct" runat="server" Width="400" CssClass="NormalTextBox" />
         </td>
     </tr>
     <tr runat="server" id="trStaticSearch">
@@ -100,7 +110,7 @@
             <asp:TextBox ID="txtStaticSearch" runat="server" Width="120" CssClass="NormalTextBox" />
         </td>
     </tr>
-    <tr>
+    <tr runat="server" id="trSortOrder">
         <td class="SubHead">
             <dnn:label id="lblSortOrder" runat="server" controlname="ddlSortOrder" suffix=":" />
         </td>
@@ -174,13 +184,22 @@
             <asp:RequiredFieldValidator ID="rfvRowTemplate" runat="server" meta:resourcekey="NotAValidNumber" ControlToValidate="txtRowTemplate" Display="Dynamic" />
         </td>
     </tr>
-    <tr>
+    <tr id="trPackageTemplate" runat="server">
         <td class="SubHead">
-            <dnn:label id="lblItemTemplate" runat="server" controlname="txtItemTemplate" suffix=":" />
+            <dnn:label id="lblPackageTemplate" runat="server" controlname="txtPackageTemplate" suffix=":" />
         </td>
         <td>
-            <asp:TextBox ID="txtItemTemplate" runat="server" Width="400" Height="200" CssClass="NormalTextBox" TextMode="MultiLine" />&nbsp;
-            <asp:RequiredFieldValidator ID="rfvItemTemplate" runat="server" meta:resourcekey="NotAValidNumber" ControlToValidate="txtItemTemplate" Display="Dynamic" />
+            <asp:TextBox ID="txtPackageTemplate" runat="server" Width="400" Height="200" CssClass="NormalTextBox" TextMode="MultiLine" />&nbsp;
+            <asp:RequiredFieldValidator ID="rfvPackageTemplate" runat="server" meta:resourcekey="NotAValidNumber" ControlToValidate="txtPackageTemplate" Display="Dynamic" />
+        </td>
+    </tr>
+    <tr id="trReviewTemplate" runat="server">
+        <td class="SubHead">
+            <dnn:label id="lblReviewTemplate" runat="server" controlname="txtReviewTemplate" suffix=":" />
+        </td>
+        <td>
+            <asp:TextBox ID="txtReviewTemplate" runat="server" Width="400" Height="200" CssClass="NormalTextBox" TextMode="MultiLine" />&nbsp;
+            <asp:RequiredFieldValidator ID="rfvReviewTemplate" runat="server" meta:resourcekey="NotAValidNumber" ControlToValidate="txtReviewTemplate" Display="Dynamic" />
         </td>
     </tr>
     <tr>

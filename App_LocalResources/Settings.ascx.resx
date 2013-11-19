@@ -120,17 +120,17 @@
   <data name="ControlTitle_settings.Text" xml:space="preserve">
     <value>DNNReferralModule Settings</value>
   </data>
-  <data name="ItemTemplate.Text" xml:space="preserve">
+  <data name="PackageTemplate.Text" xml:space="preserve">
     <value>&lt;div&gt;
 &lt;h3&gt;&lt;a href="[PackageLink]"&gt;[PackageName]&lt;/a&gt;&lt;/h3&gt;
 &lt;a href="[PackageLink]"&gt;&lt;img src="[PackageIcon]"/&gt;&lt;/a&gt;
 &lt;p&gt;[PackagePrice]&lt;/p&gt;
 &lt;/div&gt;</value>
   </data>
-  <data name="lblItemTemplate.Help" xml:space="preserve">
+  <data name="lblPackageTemplate.Help" xml:space="preserve">
     <value>Enter the HTML template used to rendor the output. possible tokens are [PackageName], [PackageId], [PackageLink], [PackagePrice], [PackageIcon], [PackageRatingNumber], [PackageRatingImage], [VendorName], [VendorLink]</value>
   </data>
-  <data name="lblItemTemplate.Text" xml:space="preserve">
+  <data name="lblPackageTemplate.Text" xml:space="preserve">
     <value>Item Template</value>
   </data>
   <data name="lblMode.Help" xml:space="preserve">
@@ -149,7 +149,7 @@
     <value>Enter the number of results you would like to display</value>
   </data>
   <data name="lblNumberOfResults.Text" xml:space="preserve">
-    <value>Number of products to Display</value>
+    <value>Number of Results to Display</value>
   </data>
   <data name="lblPrimaryTemplate.Help" xml:space="preserve">
     <value>Enter the HTML template used to rendor the output. possible tokens are [RowTemplate]</value>
@@ -181,11 +181,11 @@
   <data name="lblSortOrder.Text" xml:space="preserve">
     <value>Sort Order</value>
   </data>
-  <data name="lblVendorId.Help" xml:space="preserve">
-    <value>If you would like to display only your products, enter your vendor Id here.</value>
+  <data name="lblVendor.Help" xml:space="preserve">
+    <value>If you would like to display only your products or products from a single vendor, Select the vendor name from this list.</value>
   </data>
-  <data name="lblVendorId.Text" xml:space="preserve">
-    <value>Vendor Id</value>
+  <data name="lblVendor.Text" xml:space="preserve">
+    <value>Select A Vendor</value>
   </data>
   <data name="liMyProducts.Text" xml:space="preserve">
     <value>My Products</value>
@@ -312,5 +312,37 @@
   </data>
   <data name="lblFallBackSortOrder.Text" xml:space="preserve">
     <value>Select Fall Back Sort Order</value>
+  </data>
+  <data name="lblProduct.Help" xml:space="preserve">
+    <value>Select the product you would like to display Store data for. Only active products on the store will be listed.</value>
+  </data>
+  <data name="lblProduct.Text" xml:space="preserve">
+    <value>Select A Product</value>
+  </data>
+  <data name="lblReviewTemplate.Help" xml:space="preserve">
+    <value>Enter the HTML template used to rendor the output. possible tokens are [ReviewId], [PackageName], [PackageLink], [PackageIcon], [Rating], [Review], [ReviewerName], [ReviewerLink], [Reply], [Date], [RatingImage], [VendorName], [VendorLink]</value>
+  </data>
+  <data name="lblReviewTemplate.Text" xml:space="preserve">
+    <value>Review Template</value>
+  </data>
+  <data name="liFeaturedReviews.Text" xml:space="preserve">
+    <value>Featured Reviews</value>
+  </data>
+  <data name="liPackageReviews.Text" xml:space="preserve">
+    <value>Package Reviews</value>
+  </data>
+  <data name="liSupplierReviews.Text" xml:space="preserve">
+    <value>Vendor Reviews</value>
+  </data>
+  <data name="ReviewTemplate.Text" xml:space="preserve">
+    <value>&lt;div&gt;
+&lt;h3&gt;&lt;a href="[PackageLink]"&gt;[PackageName]&lt;/a&gt;&lt;/h3&gt;&amp;nbsp;By:&amp;nbsp;&lt;a href="[VendorLink]"&gt;[VendorName]&lt;/a&gt;
+&lt;a href="[PackageLink]"&gt;&lt;img src="[PackageIcon]"/&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href="[ReviewerLink]"&gt;[ReviewerName]&lt;/a&gt;&amp;nbsp;&lt;img src="[RatingImage]" /&gt;&amp;nbsp;on:&amp;nbsp;[Date]
+&lt;p&gt;[Review]&lt;/p&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="SelectOne.Text" xml:space="preserve">
+    <value>Select One</value>
   </data>
 </root>

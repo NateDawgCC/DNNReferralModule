@@ -67,7 +67,9 @@
   <ItemGroup>
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Components\PackageInfo.cs" />
+    <Compile Include="Components\ReviewInfo.cs" />
     <Compile Include="Components\ServiceController.cs" />
+    <Compile Include="Components\SupplierInfo.cs" />
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="DNNReferralModuleModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
