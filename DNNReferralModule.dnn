@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNNReferralModule" type="Module" version="01.01.00">
+    <package name="DNNReferralModule" type="Module" version="01.01.03">
       <friendlyName>DNNReferralModule</friendlyName>
       <description>This is a module for the DNN Platform that works with the DNN Store to enable users to refer customers to the DNN Store.</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

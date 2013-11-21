@@ -64,25 +64,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
                         txtReferralCode.Text = Settings["ReferralCode"].ToString();
 
                     ddlMode.SelectedValue = Settings.Contains("Mode") ? Settings["Mode"].ToString() : Localization.GetString("Mode", LocalResourceFile, true);
-
-                    ddlVendor.Items.Add(new ListItem(Localization.GetString("SelectOne", LocalResourceFile, true), "-1"));
-
-                    var serviceController = new ServiceController();
-                    var suppliers = serviceController.GetSupplierList();
-
-                    foreach (var supplierInfo in suppliers)
-                    {
-                        ddlVendor.Items.Add(new ListItem(supplierInfo.SupplierName, supplierInfo.SupplierUserId));
-                    }
-
-                    if (Settings.Contains("VendorId"))
-                    {
-                        if (ddlVendor.Items.FindByValue(Settings["VendorId"].ToString()) != null)
-                        {
-                            ddlVendor.SelectedValue = Settings["VendorId"].ToString();
-                        }
-                    }
-
+                    
                     if (Settings.Contains("SearchParameter"))
                         txtSearchParameter.Text = Settings["SearchParameter"].ToString();
 
@@ -236,6 +218,53 @@ namespace DotNetNuke.Modules.DNNReferralModule
             }
         }
 
+        private void LoadVendorList()
+        {
+            if (ddlVendor.Items.Count < 1)
+            {
+                ddlVendor.Items.Add(new ListItem(Localization.GetString("SelectOne", LocalResourceFile, true), "-1"));
+
+                var serviceController = new ServiceController();
+                var suppliers = serviceController.GetSupplierList();
+
+                foreach (var supplierInfo in suppliers)
+                {
+                    ddlVendor.Items.Add(new ListItem(supplierInfo.SupplierName, supplierInfo.SupplierUserId));
+                }
+
+                if (Settings.Contains("VendorId"))
+                {
+                    if (ddlVendor.Items.FindByValue(Settings["VendorId"].ToString()) != null)
+                    {
+                        ddlVendor.SelectedValue = Settings["VendorId"].ToString();
+                    }
+                }
+            }
+        }
+
+        private void LoadProductList(int supplierId)
+        {
+            var serviceController = new ServiceController();
+            var products = serviceController.GetVendorsProducts(supplierId, 1000, "nameasc");
+
+            ddlProduct.Items.Clear();
+
+            ddlProduct.Items.Add(new ListItem(Localization.GetString("SelectOne", LocalResourceFile, true), "-1"));
+
+            foreach (var productInfo in products)
+            {
+                ddlProduct.Items.Add(new ListItem(productInfo.PackageName, productInfo.PackageId.ToString(CultureInfo.InvariantCulture)));
+            }
+
+            if (Settings.Contains("PackageId"))
+            {
+                if (ddlProduct.Items.FindByValue(Settings["PackageId"].ToString()) != null)
+                {
+                    ddlProduct.SelectedValue = Settings["PackageId"].ToString();
+                }
+            }
+        }
+
         private void SetVisibility()
         {
             var mode = ddlMode.SelectedValue;
@@ -265,6 +294,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
                 case "MyProducts":
                     trSortOrder.Visible = true;
                     trPackageTemplate.Visible = true;
+                    LoadVendorList();
                     trVendor.Visible = true;
                     break;
                 case "DynamicSearchResults":
@@ -289,6 +319,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
                                 ddlFallBackSortOrder.SelectedValue = "RecentSalesRevenueDesc";
                                 break;
                             case "MyProducts":
+                                LoadVendorList();
                                 trVendor.Visible = true;
                                 break;
                             case "StaticSearchResults":
@@ -310,10 +341,12 @@ namespace DotNetNuke.Modules.DNNReferralModule
                     break;
                 case "SupplierReviews":
                     trReviewTemplate.Visible = true;
+                    LoadVendorList();
                     trVendor.Visible = true;
                     break;
                 case "PackageReviews":
                     trReviewTemplate.Visible = true;
+                    LoadVendorList();
                     trVendor.Visible = true;
                     trProduct.Visible = true;
 
@@ -326,21 +359,7 @@ namespace DotNetNuke.Modules.DNNReferralModule
 
                         if (vendorId > 0)
                         {
-                            var serviceController = new ServiceController();
-                            var products = serviceController.GetVendorsProducts(vendorId, 1000, "nameasc");
-
-                            foreach (var productInfo in products)
-                            {
-                                ddlProduct.Items.Add(new ListItem(productInfo.PackageName, productInfo.PackageId.ToString(CultureInfo.InvariantCulture)));
-                            }
-
-                            if (Settings.Contains("PackageId"))
-                            {
-                                if (ddlProduct.Items.FindByValue(Settings["PackageId"].ToString()) != null)
-                                {
-                                    ddlProduct.SelectedValue = Settings["PackageId"].ToString();
-                                }
-                            }
+                            LoadProductList(vendorId);
                         }
                     }
                     break;

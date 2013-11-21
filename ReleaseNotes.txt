@@ -8,6 +8,24 @@
 <div class="License">
 	<h3>About the DNNReferralModule</h3>
 	<p class="Owner">
+		<b>Version 1.1.3</b><br /><br />
+	</p>
+	<p>Bug Fixes.</p>
+	
+	<div>
+		<h4>Enhancements</h4>
+		<ul>
+			<li>none</li>
+		</ul>
+	</div>
+	<div>
+		<h4>Bug Fixes</h4>
+		<ul>
+			<li>There was an issue with the vendor and package drop down lists in the settings area would not bind correctly in some setups.</li>
+		</ul>
+	</div>
+	<br />
+	<p class="Owner">
 		<b>Version 1.1.0</b><br /><br />
 	</p>
 	<p>New release with additional enhancements.</p>
